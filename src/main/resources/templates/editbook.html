@@ -3,6 +3,7 @@
 <head>
     <title>Book list</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}"/>
 </head>
 <body>
 	<h1>Edit a book</h1>
@@ -23,8 +24,13 @@
 			<label for="price">Price (€)</label>
 			<input type="text" th:field="*{price}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="catlist">Category</label>
+			 <select id="catlist" th:field="*{category}" class="form-control">
+       			<option th:each="category: ${categories}" th:value="${category.categoryid}" th:text="${category.name}"></option>
+    		</select>
+			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="hidden" th:field="*{id}" />
-			<input type="submit" value="Save"></input>
+			<input class="btn btn-success" type="submit" value="Save"></input>
 		</form>
 	</div>
 </body>
