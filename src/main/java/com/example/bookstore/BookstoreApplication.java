@@ -12,6 +12,9 @@ import com.example.bookstore.domain.BookRepository;
 import com.example.bookstore.domain.Category;
 import com.example.bookstore.domain.CategoryRepository;
 
+import com.example.bookstore.domain.User;
+import com.example.bookstore.domain.UserRepository;
+
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -23,7 +26,7 @@ public class BookstoreApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner bookDemo(BookRepository repository, CategoryRepository cRepository) {
+	public CommandLineRunner bookDemo(BookRepository repository, CategoryRepository cRepository, UserRepository uRepository) {
 		return (args) -> {
 			log.info("save a couple of categories");
 			cRepository.save(new Category("History"));
@@ -36,6 +39,12 @@ public class BookstoreApplication {
 			scythians.setPrice(29.90);
 			scythians.setTitle("The Scythians - Nomad Warriors of the Steppe");
 			repository.save(scythians);
+			
+			// Create users: admin/admin user/user
+			User user1 = new User("user", "$2a$10$prBUdL6vSjeVy.wfTbToxuZ8nQ/.uyJzop1FK204r7gyYGjOGEYb2", "user@example.com", "USER");
+			User user2 = new User("admin", "$2a$10$or9UI2zbhXieoYib.N86UO.4vgz9O//A8Oxwe/jzaq8TqiBcCUVqK", "admin@example.com", "ADMIN");
+			uRepository.save(user1);
+			uRepository.save(user2);
 
 		};
 	}
